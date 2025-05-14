@@ -4,12 +4,7 @@
 2. Set up an LLM (using Hugging Face models) to process the retrieved context and generate a response.
 3. Run queries that involve retrieving documents and using the LLM to answer questions based on those documents.
 
-# Clarification on Running Steps 3.1, 3.2, and 3.3
-
-### Overview:
-In Milestone 3, you set up a retriever to fetch relevant documents from your vector store and use an LLM (e.g., Hugging Face) for answering queries based on the retrieved documents. The question arises: do you need to re-run the setup steps (retriever initialization and LLM setup) every time you run a query?
-
-You **don’t** need to re-run Steps 3.1 and 3.2 for every query, as long as the retriever and LLM setup remain unchanged.
+d to re-run Steps 3.1 and 3.2 for every query, as long as the retriever and LLM setup remain unchanged.
 
 ---
 
@@ -51,16 +46,6 @@ In normal operation, you only need to initialize the retriever (Step 3.1) and se
 - **Yes**, re-running these steps is only required if you modify the vector store or change the LLM setup (e.g., switching models or updating the retriever configuration).
 
 This allows for efficient querying, where the retriever and LLM setups are done once and can be reused for subsequent queries without unnecessary overhead.
-
-
-## Models at huggin face
-You need to choose a model designed for text generation. Here are a few good alternatives that are stable and well-supported:
-
-Model ID	Description	Task
-gpt2	Classic text generation model	text-generation
-tiiuae/falcon-7b-instruct	Instruction-tuned for QA and dialogue	text-generation
-google/flan-t5-base	Text2Text model, very good for structured tasks	text2text-generation
-bigscience/bloomz-560m
 
 
 ## 🛠️ Running the Ingestion Pipeline
