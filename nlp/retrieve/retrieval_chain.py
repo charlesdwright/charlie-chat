@@ -1,28 +1,26 @@
 # nlp/retrieve/retrieval_chain.py
 
 import logging
-from langchain.chains import RetrievalQA
+
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
+
 from nlp.llms.cloudflare import CloudflareLLM
 from nlp.retrieve.retriever_setup import get_retriever
 
 logger = logging.getLogger(__name__)
 
+
 def create_retrieval_qa_chain():
-    """Create the RetrievalQA chain using Cloudflare's LLM and retriever."""
-    logger.info("📂 Initializing retriever...")
     retriever = get_retriever()
-    logger.info("✅ Retriever initialized.")
-
-    logger.info("🧠 Initializing Cloudflare LLM...")
     llm = CloudflareLLM()
-    logger.info("✅ Cloudflare LLM initialized.")
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
-    logger.info("🔗 Creating RetrievalQA chain...")
-    qa_chain = RetrievalQA.from_chain_type(
+    qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
-        chain_type="stuff",
         retriever=retriever,
-        return_source_documents=True
+        memory=memory,
+        return_source_documents=False,
     )
-    logger.info("✅ RetrievalQA chain created successfully.")
+    logger.info("✅ ConversationalRetrievalChain created successfully.")
     return qa_chain
