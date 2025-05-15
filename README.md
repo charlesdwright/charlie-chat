@@ -4,7 +4,7 @@
 2. Set up an LLM (using Hugging Face models) to process the retrieved context and generate a response.
 3. Run queries that involve retrieving documents and using the LLM to answer questions based on those documents.
 
-d to re-run Steps 3.1 and 3.2 for every query, as long as the retriever and LLM setup remain unchanged.
+No need to re-run Steps 3.1 and 3.2 for every query, as long as the retriever and LLM setup remain unchanged.
 
 ---
 
