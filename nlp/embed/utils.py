@@ -72,13 +72,16 @@ def embed_and_store(
             continue
 
         logger.warning(
-            f"✅ Adding embed to vectorstore collection: '{collection_name}'..."
+            f"✅💥 Adding embed to vectorstore collection: '{collection_name}'..."
         )
         collection.add(
             documents=[content],
             metadatas=[document.metadata],
             embeddings=[embedding],
             ids=[doc_id],
+        )
+        logger.warning(
+            f"✅ Added embed to vectorstore collection: '{collection_name}'..."
         )
         successful_additions += 1
 
