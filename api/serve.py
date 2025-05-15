@@ -1,4 +1,4 @@
-# Filename: api/server.py
+# Filename: api/serve.py
 
 import logging
 from typing import List, Tuple
@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 
 from nlp.retrieve.retrieval_chain import create_retrieval_qa_chain
 
-# Set up logging
+# Setup logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -29,50 +29,44 @@ class QueryRequest(BaseModel):
     )
 
 
-# Initialize QA chain at startup
+# Initialize the ConversationalRetrievalChain once
 qa_chain = create_retrieval_qa_chain()
 
 
 @app.post("/chat")
 def chat_endpoint(request: QueryRequest):
-    # Log incoming request data
     logger.info("Received new chat request.")
     logger.debug(f"Request data: {request.dict()}")
 
     try:
-        # Log before calling the qa_chain
         logger.info("Processing question through the QA chain.")
-        response = qa_chain(
-            {"question": request.question, "chat_history": request.chat_history}
-        )
 
-        # Log the response from qa_chain
+        # Pass user input into the chain
+        response = qa_chain({"question": request.question})
+
         logger.info("QA chain processed the question.")
         logger.debug(f"Response from QA chain: {response}")
+        logger.debug(f"Raw response keys: {list(response.keys())}")
 
-        # Extract result (answer) and updated chat history
+        # Extract the correct fields
         result = response.get("answer", "No result found")
-        updated_chat_history = response.get("chat_history", [])
+        updated_chat_history = qa_chain.memory.chat_memory.messages
 
-        # Log extracted details
-        logger.debug(f"Extracted answer: {result}")
-        logger.debug(f"Updated chat_history: {updated_chat_history}")
+        # Optional diagnostic: for future debugging
+        logger.debug("Extracted answer: %s", result)
+        logger.debug("Updated chat_history: %s", updated_chat_history)
 
-        # Create memory output with only the answer (no source_documents)
-        memory_output = {
-            "answer": result,
-        }
-
-        # Return the response with only the necessary information
+        # Final response payload
         return {
-            "answer": result,  # Return the answer directly
-            "chat_history": updated_chat_history,  # Updated chat history for the session
-            "memory_output": memory_output,  # Internal memory tracking output with just the answer
+            "answer": result,
+            "chat_history": updated_chat_history,
+            "memory_output": {"answer": result},
         }
 
     except Exception as e:
-        # Log the exception if anything goes wrong
-        logger.error(f"Error occurred while processing the request: {str(e)}")
+        logger.error(
+            f"Error occurred while processing the request:\n{e}", exc_info=True
+        )
         return {"error": "An error occurred while processing your request."}
 
 
