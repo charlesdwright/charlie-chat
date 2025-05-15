@@ -41,7 +41,7 @@ def embed_and_store(
             logger.warning(f"⚠️ Failed to delete collection '{collection_name}': {e}")
 
     # (Re)create the target collection
-    logger.warning(f"🧨 (Re)creating vectorstore collection: '{collection_name}'...")
+    logger.warning(f"📝💥⚠️ (Re)creating vectorstore collection: '{collection_name}'...")
     collection = client.get_or_create_collection(collection_name)
 
     # Optional cleanup of other collections
@@ -72,7 +72,7 @@ def embed_and_store(
             continue
 
         logger.warning(
-            f"🧨 Adding embed to vectorstore collection: '{collection_name}'..."
+            f"✅ Adding embed to vectorstore collection: '{collection_name}'..."
         )
         collection.add(
             documents=[content],
