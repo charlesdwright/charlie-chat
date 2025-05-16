@@ -67,7 +67,7 @@ class CloudflareEmbeddings(Embeddings):
             raise
 
         result = response.json()
-        logger.debug(f"Response from Cloudflare: {result}")
+        logger.debug(f"Response from Cloudflare: {len(result['result']['data'][0])}")
 
         if "result" in result and "data" in result["result"]:
             embedding = result["result"]["data"][0]

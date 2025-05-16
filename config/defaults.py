@@ -45,7 +45,7 @@ CONFIG = {
         "max_token_limit": 8000,  # Used if type == "summary"
     },
     "CHAIN": {
-        "return_source_documents": False  # Set to True if you want debug/tracing mode
+        "return_source_documents": True  # Set to True if you want debug/tracing mode
     },
 }
 

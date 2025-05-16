@@ -1,1 +1,0 @@
-dumbed down for tutorial submission.

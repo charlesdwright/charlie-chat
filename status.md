@@ -88,7 +88,7 @@
     -   Define the  `generate_response`  function to handle HTTP requests to the backend, send the user message, and get a response from the LLM.
 
     -   Capture user input and append it to the message history in session state.
-
+## YOU ARE HERE!
 4.  **Check Message Roles**:
 
     -   Check the role of the last message in the history.
