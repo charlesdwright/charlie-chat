@@ -11,3 +11,46 @@
   6. **Ingestion Complexity**: Slight increase in ingestion time but minimal for small to medium datasets.
 
 - **Action**: Update `chunker.py` to add title metadata to each chunk when processing documents.
+
+
+## **Project To-Do List**
+
+### **1. Setup Conda for Environment Isolation and Dependency Management**
+
+-   **Install Conda**  (Miniconda or Anaconda).
+
+-   **Create a clean environment**  for both the frontend (Streamlit) and backend (FastAPI) to avoid dependency conflicts:
+
+    -   Frontend Environment:  `streamlit-ui`
+
+    -   Backend Environment:  `backend-env`
+
+-   **Install dependencies**  for both frontend and backend:
+
+    -   For  **Frontend**  (`streamlit`  and any UI-related packages).
+
+    -   For  **Backend**  (`fastapi`,  `torch`,  `chromadb`,  `requests`,  `pydantic`,  `langchain`, etc.).
+
+-   **Export environments**  to ensure reproducibility:
+
+    -   Frontend:  `conda env export > frontend-environment.yml`
+
+    -   Backend:  `conda env export > backend-environment.yml`
+
+-   **Share environments**  via  `environment.yml`  for easy installation on other machines.
+
+
+### **2. Backend (FastAPI + LangChain)**
+
+-   Ensure backend is properly set up with FastAPI for handling requests to the LangChain-powered backend.
+
+-   Verify correct implementation of the  **ConversationalRetrievalChain**  and integrate logging and diagnostics for backend requests.
+
+
+### **3. Streamlit Frontend Setup**
+
+-   Set up the  **Streamlit**  frontend with chat functionality.
+
+-   Connect the frontend to the FastAPI backend to process user messages via API requests.
+
+-   Implement  **session memory**  and  **message history**  to persist chat.

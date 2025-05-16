@@ -3,9 +3,12 @@
 import streamlit as st
 import requests
 from typing import List, Tuple
+from config import CONFIG
 
 # === Configuration ===
-BACKEND_URL = "http://localhost:8000/chat"
+#BACKEND_URL = "http://localhost:8000/chat"
+BACKEND_URL =CONFIG["backend_url"]
+
 st.set_page_config(page_title="LangChain Chat", page_icon="🧠", layout="wide")
 
 # === Initialize chat memory ===
