@@ -1,3 +1,5 @@
+# - nlp/retrieve/retrieval_chain.py
+
 import logging
 
 from langchain.chains import ConversationalRetrievalChain
@@ -23,6 +25,7 @@ def get_memory():
             memory_key="chat_history",
             k=mem_cfg.get("window_size", 3),
             return_messages=True,
+            output_key="answer",
         )
     elif mem_type == "summary_buffer":
         return ConversationSummaryBufferMemory(
@@ -30,11 +33,11 @@ def get_memory():
             max_token_limit=mem_cfg.get("max_token_limit", 8000),
             memory_key="chat_history",
             return_messages=True,
+            output_key="answer",
         )
     else:  # fallback to 'buffer'
         return ConversationBufferMemory(
-            memory_key="chat_history",
-            return_messages=True,
+            memory_key="chat_history", return_messages=True, output_key="answer"
         )
 
 
@@ -47,7 +50,7 @@ def create_retrieval_qa_chain():
         llm=llm,
         retriever=retriever,
         memory=memory,
-        return_source_documents=CONFIG.get("MEMORY", {}).get(
+        return_source_documents=CONFIG.get("CHAIN", {}).get(
             "return_source_documents", False
         ),
     )
