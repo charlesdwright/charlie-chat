@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+langchain
+langserve
+chromadb
+requests
+python-dotenv
