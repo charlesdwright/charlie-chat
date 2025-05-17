@@ -1,5 +1,5 @@
 # Filename: ui/streamlit_app.py
-
+import logging
 import streamlit as st
 import requests
 import uuid
