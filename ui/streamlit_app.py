@@ -28,7 +28,7 @@ def get_response_from_backend(user_input: str, chat_history: List[Tuple[str, str
             "chat_id": st.session_state["chat_id"],
         }
         #response = requests.post(BACKEND_URL, json=payload, timeout=30)
-        response = requests.post(f"{BACKEND_URL}/chat", json={payload})
+        response = requests.post(f"{BACKEND_URL}/chat", json=payload)
         response.raise_for_status()
         data = response.json()
         return data.get("answer", "⚠️ No answer returned.")
