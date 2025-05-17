@@ -1,4 +1,4 @@
-name: test_pyarrow_env
+name: chatbot_ui
 channels:
   - conda-forge
   - defaults
@@ -106,4 +106,4 @@ dependencies:
       - typing-extensions==4.13.2
       - tzdata==2025.2
       - urllib3==2.4.0
-prefix: /Users/charleswright/miniconda3/envs/test_pyarrow_env
+prefix: /Users/charleswright/miniconda3/envs/chatbot_ui

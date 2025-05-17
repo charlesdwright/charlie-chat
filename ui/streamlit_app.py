@@ -1,13 +1,15 @@
 # Filename: ui/streamlit_app.py
 import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 import streamlit as st
 import requests
 import uuid
 from typing import List, Tuple
 from config import CONFIG
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
 
 # === Configuration ===
 BACKEND_URL = CONFIG["backend_url"]
