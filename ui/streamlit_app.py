@@ -9,8 +9,6 @@ import uuid
 from typing import List, Tuple
 from config import CONFIG
 
-
-
 # === Configuration ===
 BACKEND_URL = CONFIG["backend_url"]
 
