@@ -6,6 +6,9 @@ import uuid
 from typing import List, Tuple
 from config import CONFIG
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 # === Configuration ===
 BACKEND_URL = CONFIG["backend_url"]
 
@@ -27,6 +30,8 @@ def get_response_from_backend(user_input: str, chat_history: List[Tuple[str, str
             "chat_history": chat_history,
             "chat_id": st.session_state["chat_id"],
         }
+        logger.debug(f" ---- the payload: {payload}")
+
         #response = requests.post(BACKEND_URL, json=payload, timeout=30)
         response = requests.post(f"{BACKEND_URL}/chat", json=payload)
         response.raise_for_status()
